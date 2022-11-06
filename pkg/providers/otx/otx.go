@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/bobesa/go-domain-util/domainutil"
-	jsoniter "github.com/json-iterator/go"
+	"encoding/json"
 	"github.com/lc/gau/v2/pkg/httpclient"
 	"github.com/lc/gau/v2/pkg/providers"
 	"github.com/sirupsen/logrus"
@@ -61,7 +61,7 @@ paginate:
 				return fmt.Errorf("failed to fetch alienvault(%d): %s", page, err)
 			}
 			var result otxResult
-			if err := jsoniter.Unmarshal(resp, &result); err != nil {
+			if err := json.Unmarshal(resp, &result); err != nil {
 				return fmt.Errorf("failed to decode otx results for page %d: %s", page, err)
 			}
 

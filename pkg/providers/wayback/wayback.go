@@ -3,7 +3,7 @@ package wayback
 import (
 	"context"
 	"fmt"
-	jsoniter "github.com/json-iterator/go"
+	"encoding/json"
 	"github.com/lc/gau/v2/pkg/httpclient"
 	"github.com/lc/gau/v2/pkg/providers"
 	"github.com/sirupsen/logrus"
@@ -59,7 +59,7 @@ func (c *Client) Fetch(ctx context.Context, domain string, results chan string) 
 			}
 
 			var result waybackResult
-			if err = jsoniter.Unmarshal(resp, &result); err != nil {
+			if err = json.Unmarshal(resp, &result); err != nil {
 				return fmt.Errorf("failed to decode wayback results for page %d: %s", page, err)
 			}
 
@@ -104,7 +104,7 @@ func (c *Client) getPagination(domain string) (uint, error) {
 
 	var paginationResult uint
 
-	if err = jsoniter.Unmarshal(resp, &paginationResult); err != nil {
+	if err = json.Unmarshal(resp, &paginationResult); err != nil {
 		return 0, err
 	}
 

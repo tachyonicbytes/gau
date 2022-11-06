@@ -1,19 +1,20 @@
 package flags
 
 import (
-	"crypto/tls"
+	// "crypto/tls"
 	"flag"
 	"fmt"
 	"github.com/lc/gau/v2/pkg/providers"
 	"github.com/lynxsecurity/pflag"
 	"github.com/lynxsecurity/viper"
 	log "github.com/sirupsen/logrus"
-	"github.com/valyala/fasthttp"
-	"github.com/valyala/fasthttp/fasthttpproxy"
-	"net/url"
+	// "github.com/valyala/fasthttp"
+	// "github.com/valyala/fasthttp/fasthttpproxy"
+	"tinygo.org/x/drivers/net/http"
+	// "net/url"
 	"os"
 	"path/filepath"
-	"strings"
+	// "strings"
 	"time"
 )
 
@@ -40,21 +41,8 @@ type Config struct {
 }
 
 func (c *Config) ProviderConfig() (*providers.Config, error) {
-	var dialer fasthttp.DialFunc
-
 	if c.Proxy != "" {
-		parse, err := url.Parse(c.Proxy)
-		if err != nil {
-			return nil, fmt.Errorf("proxy url: %v", err)
-		}
-		switch parse.Scheme {
-		case "http":
-			dialer = fasthttpproxy.FasthttpHTTPDialer(strings.ReplaceAll(c.Proxy, "http://", ""))
-		case "socks5":
-			dialer = fasthttpproxy.FasthttpSocksDialer(c.Proxy)
-		default:
-			return nil, fmt.Errorf("unsupported proxy scheme: %s", parse.Scheme)
-		}
+		panic("We don't support proxying for now")
 	}
 
 	pc := &providers.Config{
@@ -64,11 +52,11 @@ func (c *Config) ProviderConfig() (*providers.Config, error) {
 		MaxRetries:        c.MaxRetries,
 		IncludeSubdomains: c.IncludeSubdomains,
 		RemoveParameters:  c.RemoveParameters,
-		Client: &fasthttp.Client{
-			TLSConfig: &tls.Config{
-				InsecureSkipVerify: true,
-			},
-			Dial: dialer,
+		Client: &http.Client{
+			// TLSConfig: &tls.Config{
+				// InsecureSkipVerify: true,
+			// },
+			// Dial: nil,
 		},
 		Providers: c.Providers,
 		Output:    c.Outfile,

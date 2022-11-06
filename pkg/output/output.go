@@ -1,7 +1,7 @@
 package output
 
 import (
-	jsoniter "github.com/json-iterator/go"
+	"encoding/json"
 	"github.com/valyala/bytebufferpool"
 	"io"
 	"net/url"
@@ -57,7 +57,7 @@ func WriteURLs(writer io.Writer, results <-chan string, blacklistMap map[string]
 
 func WriteURLsJSON(writer io.Writer, results <-chan string, blacklistMap map[string]struct{}, RemoveParameters bool) {
 	var jr JSONResult
-	enc := jsoniter.NewEncoder(writer)
+	enc := json.NewEncoder(writer)
 	for result := range results {
 		if len(blacklistMap) != 0 {
 			u, err := url.Parse(result)

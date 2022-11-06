@@ -7,7 +7,7 @@ import (
 	"errors"
 	"fmt"
 
-	jsoniter "github.com/json-iterator/go"
+	"encoding/json"
 	"github.com/lc/gau/v2/pkg/httpclient"
 	"github.com/lc/gau/v2/pkg/providers"
 	"github.com/sirupsen/logrus"
@@ -37,7 +37,7 @@ func New(c *providers.Config, filters providers.Filters) (*Client, error) {
 	}
 
 	var r apiResult
-	if err = jsoniter.Unmarshal(resp, &r); err != nil {
+	if err = json.Unmarshal(resp, &r); err != nil {
 		return nil, err
 	}
 
@@ -86,7 +86,7 @@ paginate:
 			sc := bufio.NewScanner(bytes.NewReader(resp))
 			for sc.Scan() {
 				var res apiResponse
-				if err := jsoniter.Unmarshal(sc.Bytes(), &res); err != nil {
+				if err := json.Unmarshal(sc.Bytes(), &res); err != nil {
 					return fmt.Errorf("failed to decode commoncrawl result:  %s", err)
 				}
 				if res.Error != "" {
@@ -120,7 +120,7 @@ func (c *Client) getPagination(domain string) (paginationResult, error) {
 	}
 
 	var r paginationResult
-	if err = jsoniter.Unmarshal(resp, &r); err != nil {
+	if err = json.Unmarshal(resp, &r); err != nil {
 		return r, err
 	}
 

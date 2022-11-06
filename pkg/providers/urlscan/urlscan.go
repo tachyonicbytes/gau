@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	jsoniter "github.com/json-iterator/go"
+	"encoding/json"
 	"github.com/lc/gau/v2/pkg/httpclient"
 	"github.com/lc/gau/v2/pkg/providers"
 	"github.com/sirupsen/logrus"
@@ -57,7 +57,7 @@ paginate:
 				return fmt.Errorf("failed to fetch urlscan: %s", err)
 			}
 			var result apiResponse
-			decoder := jsoniter.NewDecoder(bytes.NewReader(resp))
+			decoder := json.NewDecoder(bytes.NewReader(resp))
 			decoder.UseNumber()
 			if err = decoder.Decode(&result); err != nil {
 				return fmt.Errorf("failed to decode urlscan result:  %s", err)

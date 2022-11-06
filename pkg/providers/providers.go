@@ -2,7 +2,8 @@ package providers
 
 import (
 	"context"
-	"github.com/valyala/fasthttp"
+	// "github.com/valyala/fasthttp"
+	"tinygo.org/x/drivers/net/http"
 )
 
 const Version = `2.1.2`
@@ -25,7 +26,7 @@ type Config struct {
 	MaxRetries        uint
 	IncludeSubdomains bool
 	RemoveParameters  bool
-	Client            *fasthttp.Client
+	Client            *http.Client
 	Providers         []string
 	Blacklist         map[string]struct{}
 	Output            string
