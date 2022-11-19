@@ -9,11 +9,16 @@ import (
 	"io"
 	"os"
 	"sync"
+	// "fmt"
 )
 
 func main() {
-	flag := flags.New()
-	cfg, err := flag.ReadInConfig()
+	// flag := flags.New()
+	// cfg, err := flag.ReadInConfig()
+
+	cfg, err := flags.Temp()
+
+	// fmt.Printf("%#v", cfg)
 	if err != nil {
 		if cfg.Verbose {
 			log.Printf("[WARN]: error reading config: %v", err)

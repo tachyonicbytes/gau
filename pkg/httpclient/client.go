@@ -2,8 +2,8 @@ package httpclient
 
 import (
 	"errors"
-	// "tinygo.org/x/drivers/net/http"
-	"net/http"
+	"tinygo.org/x/drivers/net/http"
+	// "net/http"
 	"io/ioutil"
 )
 

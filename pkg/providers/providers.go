@@ -2,8 +2,8 @@ package providers
 
 import (
 	"context"
-	// "tinygo.org/x/drivers/net/http"
-	"net/http"
+	"tinygo.org/x/drivers/net/http"
+	// "net/http"
 )
 
 const Version = `2.1.2`
