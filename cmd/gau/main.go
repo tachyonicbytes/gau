@@ -5,7 +5,7 @@ import (
 	"github.com/lc/gau/v2/pkg/output"
 	"github.com/lc/gau/v2/runner"
 	"github.com/lc/gau/v2/runner/flags"
-	log "github.com/sirupsen/logrus"
+	"log"
 	"io"
 	"os"
 	"sync"
@@ -16,7 +16,7 @@ func main() {
 	cfg, err := flag.ReadInConfig()
 	if err != nil {
 		if cfg.Verbose {
-			log.Warnf("error reading config: %v", err)
+			log.Printf("[WARN]: error reading config: %v", err)
 		}
 	}
 
@@ -33,7 +33,7 @@ func main() {
 	gau := &runner.Runner{}
 
 	if err = gau.Init(config, pMap); err != nil {
-		log.Warn(err)
+		log.Printf("[WARN] :%v", err)
 	}
 
 	results := make(chan string)

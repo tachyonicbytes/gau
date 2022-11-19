@@ -7,7 +7,7 @@ import (
 	"encoding/json"
 	"github.com/lc/gau/v2/pkg/httpclient"
 	"github.com/lc/gau/v2/pkg/providers"
-	"github.com/sirupsen/logrus"
+	"log"
 )
 
 const (
@@ -53,7 +53,7 @@ paginate:
 			break paginate
 		default:
 			if c.config.Verbose {
-				logrus.WithFields(logrus.Fields{"provider": Name, "page": page - 1}).Infof("fetching %s", domain)
+				log.Printf("Provider: %v, page: %v, fetching %s", Name, page - 1, domain)
 			}
 			apiURL := c.formatURL(domain, page)
 			resp, err := httpclient.MakeRequest(c.config.Client, apiURL, c.config.MaxRetries, c.config.Timeout)

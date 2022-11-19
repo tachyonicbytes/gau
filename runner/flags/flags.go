@@ -6,7 +6,7 @@ import (
 	"github.com/lc/gau/v2/pkg/providers"
 	"github.com/lynxsecurity/pflag"
 	"github.com/lynxsecurity/viper"
-	log "github.com/sirupsen/logrus"
+	"log"
 	// "tinygo.org/x/drivers/net/http"
 	"net/http"
 	"os"

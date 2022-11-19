@@ -10,7 +10,7 @@ import (
 	"encoding/json"
 	"github.com/lc/gau/v2/pkg/httpclient"
 	"github.com/lc/gau/v2/pkg/providers"
-	"github.com/sirupsen/logrus"
+	"log"
 )
 
 const (
@@ -63,7 +63,7 @@ func (c *Client) Fetch(ctx context.Context, domain string, results chan string) 
 	// 0 pages means no results
 	if p.Pages == 0 {
 		if c.config.Verbose {
-			logrus.WithFields(logrus.Fields{"provider": Name}).Infof("no results for %s", domain)
+			log.Printf("Provider: %v no results for %s", Name, domain)
 		}
 		return nil
 	}
@@ -75,7 +75,7 @@ paginate:
 			break paginate
 		default:
 			if c.config.Verbose {
-				logrus.WithFields(logrus.Fields{"provider": Name, "page": page}).Infof("fetching %s", domain)
+				log.Printf("Provider: %v, page: %v, fetching %s", Name, page, domain)
 			}
 			apiURL := c.formatURL(domain, page)
 			resp, err := httpclient.MakeRequest(c.config.Client, apiURL, c.config.MaxRetries, c.config.Timeout)

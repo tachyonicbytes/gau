@@ -7,7 +7,7 @@ import (
 	"encoding/json"
 	"github.com/lc/gau/v2/pkg/httpclient"
 	"github.com/lc/gau/v2/pkg/providers"
-	"github.com/sirupsen/logrus"
+	"log"
 	"strings"
 )
 
@@ -49,7 +49,7 @@ paginate:
 			break paginate
 		default:
 			if c.config.Verbose {
-				logrus.WithFields(logrus.Fields{"provider": Name, "page": page}).Infof("fetching %s", domain)
+				log.Printf("Provider: %v, page: %v, fetching %s", Name, page, domain)
 			}
 			apiURL := c.formatURL(domain, searchAfter)
 			resp, err := httpclient.MakeRequest(c.config.Client, apiURL, c.config.MaxRetries, c.config.Timeout, header)
@@ -65,7 +65,7 @@ paginate:
 			// rate limited
 			if result.Status == 429 {
 				if c.config.Verbose {
-					logrus.WithField("provider", "urlscan").Warnf("urlscan responded with 429")
+					log.Printf("urlscan responded with 429. TODO: Put provider and urlscan here")
 				}
 				break paginate
 			}

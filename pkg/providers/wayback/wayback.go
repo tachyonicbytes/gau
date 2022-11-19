@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"github.com/lc/gau/v2/pkg/httpclient"
 	"github.com/lc/gau/v2/pkg/providers"
-	"github.com/sirupsen/logrus"
+	"log"
 )
 
 const (
@@ -49,7 +49,7 @@ func (c *Client) Fetch(ctx context.Context, domain string, results chan string) 
 			return nil
 		default:
 			if c.config.Verbose {
-				logrus.WithFields(logrus.Fields{"provider": Name, "page": page}).Infof("fetching %s", domain)
+				log.Printf("Provider: %v, page: %v, fetching %s", Name, page, domain)
 			}
 			apiURL := c.formatURL(domain, page)
 			// make HTTP request

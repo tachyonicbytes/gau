@@ -6,7 +6,6 @@ require (
 	github.com/bobesa/go-domain-util v0.0.0-20190911083921-4033b5f7dd89
 	github.com/lynxsecurity/pflag v1.1.3
 	github.com/lynxsecurity/viper v1.10.0
-	github.com/sirupsen/logrus v1.9.0
 	github.com/valyala/bytebufferpool v1.0.0
 )
 

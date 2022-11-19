@@ -8,7 +8,7 @@ import (
 	"github.com/lc/gau/v2/pkg/providers/otx"
 	"github.com/lc/gau/v2/pkg/providers/urlscan"
 	"github.com/lc/gau/v2/pkg/providers/wayback"
-	"github.com/sirupsen/logrus"
+	"log"
 	"sync"
 )
 
@@ -80,7 +80,7 @@ work:
 					go func(p providers.Provider) {
 						defer wg.Done()
 						if err := p.Fetch(ctx, domain, results); err != nil && r.config.Verbose {
-							logrus.WithField("provider", p.Name()).Warnf("%s - %v", domain, err)
+							log.Printf("provider: %s, %s - %v", p.Name(), domain, err)
 						}
 					}(p)
 				}
