@@ -8,7 +8,6 @@ require (
 	github.com/lynxsecurity/viper v1.10.0
 	github.com/sirupsen/logrus v1.9.0
 	github.com/valyala/bytebufferpool v1.0.0
-	tinygo.org/x/drivers v0.23.0
 )
 
 require (

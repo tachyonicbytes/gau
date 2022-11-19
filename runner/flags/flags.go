@@ -1,20 +1,16 @@
 package flags
 
 import (
-	// "crypto/tls"
 	"flag"
 	"fmt"
 	"github.com/lc/gau/v2/pkg/providers"
 	"github.com/lynxsecurity/pflag"
 	"github.com/lynxsecurity/viper"
 	log "github.com/sirupsen/logrus"
-	// "github.com/valyala/fasthttp"
-	// "github.com/valyala/fasthttp/fasthttpproxy"
-	"tinygo.org/x/drivers/net/http"
-	// "net/url"
+	// "tinygo.org/x/drivers/net/http"
+	"net/http"
 	"os"
 	"path/filepath"
-	// "strings"
 	"time"
 )
 

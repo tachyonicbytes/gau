@@ -2,8 +2,8 @@ package providers
 
 import (
 	"context"
-	// "github.com/valyala/fasthttp"
-	"tinygo.org/x/drivers/net/http"
+	// "tinygo.org/x/drivers/net/http"
+	"net/http"
 )
 
 const Version = `2.1.2`

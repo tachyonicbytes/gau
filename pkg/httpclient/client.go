@@ -2,13 +2,9 @@ package httpclient
 
 import (
 	"errors"
-	// "github.com/valyala/fasthttp"
-	"tinygo.org/x/drivers/net/http"
-	// "net/url"
-	// "math/rand"
+	// "tinygo.org/x/drivers/net/http"
+	"net/http"
 	"io/ioutil"
-	// "bytes"
-	// "time"
 )
 
 var ErrNilResponse = errors.New("unexpected nil response")
@@ -27,25 +23,16 @@ func MakeRequest(c *http.Client, URL string, maxRetries uint, timeout uint, head
 	)
 	retries := int(maxRetries)
 	for i := retries; i >= 0; i-- {
-		// req = http.AcquireRequest()
 		req, err = http.NewRequest("GET", URL, nil)
-		// req.Header.SetMethod(fasthttp.MethodGet)
-		// req.Method = "GET"
 		for _, header := range headers {
 			if header.Key != "" {
 				req.Header.Set(header.Key, header.Value)
 			}
 		}
-		// req.Header.Set(fasthttp.HeaderUserAgent, getUserAgent())
 		req.Header.Set("UserAgent", getUserAgent())
 		req.Header.Set("Content-Type", "application/json")
 		req.Header.Set("Accept", "*/*")
-		// url, err := url.Parse(URL)
-		// if err != nil {
-			// return nil, err
-		// }
 
-		// req.URL = url
 		respBody, err = doReq(c, req, timeout)
 		if err == nil {
 			goto done
@@ -60,10 +47,6 @@ done:
 
 // doReq handles http requests
 func doReq(c *http.Client, req *http.Request, timeout uint) ([]byte, error) {
-	// resp := fasthttp.AcquireResponse()
-	// defer fasthttp.ReleaseResponse(resp)
-	// defer fasthttp.ReleaseRequest(req)
-	// if err := c.DoTimeout(req, resp, time.Second*time.Duration(timeout)); err != nil {
 	resp, err := c.Do(req)
 	if err != nil {
 		return nil, err
@@ -81,11 +64,6 @@ func doReq(c *http.Client, req *http.Request, timeout uint) ([]byte, error) {
 	if err != nil {
 		panic(err)
 	}
-
-	// if err := resp.Write(&buf); err != nil {
-        // panic(err)
-    // }
-	// buf.ReadFrom(resp.Body)
 
 	return body, nil
 }
@@ -105,8 +83,6 @@ func getUserAgent() string {
 		"Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)",
 	}
 
-	// rand.Seed(time.Now().UnixNano())
-	// randomIndex := rand.Intn(len(payload))
 	randomIndex := 1
 	pick := payload[randomIndex]
 
